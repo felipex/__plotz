@@ -1,0 +1,21 @@
+*** Dever funcionar antes de mostrar ao orientador.
+**  Deve ficar pronta para a versão final.
+*   Seria bom que estivesse pronta antes da versão final.
+
+*** (9/1/2017) - Separar os estilos do iframe e do site;
+*** (9/1/2017) - Consertar a visualização da função em TeX;
+**  (9/1/2017) - Fazer o salvar como;
+**  (9/1/2017) - Fazer o logotipo;
+OK *** (9/1/2017) - Colocar o servidor node;
+OK *** (9/1/2017) - Utilzar templates (Template próprio mudar logo que precisar);
+*** (9/1/2017) - Colocar documentação mínima;
+*** (9/1/2017) - Colocar tutoriais de como utilizar;
+*   (9/1/2017) - Otimização do carregamento da página. Ficou meio lento no celular;
+**  (12/1/2017) - Excluir a função;
+
+
+
+* * * * * * * ERROS * * * * * * * 
+Bloqueado carregamento de conteúdo ativo mesclado
+“http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML”
+-- Por conta disso não está formatando o TeX.

@@ -1,0 +1,54 @@
+<!-- Tags do relatório -->
+*<titulo>
+
+<autor>
+
+<descricao>
+
+*<secao>
+
+<subsecao>
+
+*<paragrafo>
+  *<destaque>
+
+*<quadro>
+  Contém parágrafos
+  
+<link>
+
+<definicao>
+<teorema>
+
+<questoes>
+  <questao>
+  
+<lista-ordenada>
+  <item>
+  
+<lista-sem-ordem>
+  <item>
+  
+<lista com descricao>
+  <item>
+
+<grafico>
+
+<video>
+
+<audio>
+
+<figura>
+
+<citacao>
+
+<tabela>
+  <cabecalho>
+    <celula>
+  <linha>
+    <celula>
+  <legenda>
+
+<equacao>
+
+<sim-phet>

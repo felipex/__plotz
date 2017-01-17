@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8" />
+<title>Hello World</title>
+<script src="https://unpkg.com/react@latest/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<script type="text/babel" src="react-ex01.js"></script>
+
+<style>
+.editavel:hover {
+  border: 1px dashed gray;
+  background-color: #EEE;
+}  
+</style>
+
+</<head>
+    
+<body>
+  <div id="root"></div>
+  <button onclick="novo()">Novo</button>
+  <p id="p01-id" name="p01" class="editavel" ondblclick="editar(this)" >Este é o primeiro parágrafo</p>
+    
+  <div id="root2"></div>
+    
+</body>
+</head>
+</html>

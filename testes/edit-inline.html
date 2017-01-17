@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.5.1/math.min.js"></script>   	
+<script type="text/x-mathjax-config"> 
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<title>:: PlotZ ::</title>
+<script>
+function oninput(event) {
+  //alert(target.target.name);
+  var namestr = event.target.attributes["name"].value;
+  var destinostr = namestr.substr(0, namestr.indexOf("-edit"));
+  var destino = document.getElementsByName(destinostr)[0];
+  destino.innerHTML = event.target.value;
+  /* global MathJax */
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+}
+
+function editar(a){
+  var formEditor = document.createElement("form");
+  formEditor.style = "border: 1px dashed gray";
+  document.body.insertBefore(formEditor, a);
+  
+  var editor = document.createElement("textarea");
+  editor.rows = 2;
+  editor.cols = 100;
+  editor.value = a.innerHTML;
+  editor.oninput = oninput;
+  editor.name = a.attributes["name"].value + "-edit";
+  formEditor.appendChild(editor);
+
+  formEditor.appendChild(document.createElement("br"));
+
+  var botaoSalvar = document.createElement("button");
+  botaoSalvar.textContent = "Salvar";
+  formEditor.appendChild(botaoSalvar);
+} 
+  
+
+</script>
+<style>
+.editavel:hover {
+  border: 1px dashed gray;
+  background-color: #EEE;
+}  
+</style>
+</head>
+<body>
+  
+  <p id="p01-id" name="p01" class="editavel" ondblclick="editar(this)" >Este é o primeiro parágrafo</p>
+  <p id="p02-id" name="p02" class="editavel" ondblclick="editar(this)" >Este é o segundo parágrafo com $TeX$ $f(x)=y$</p>
+
+
+</body>
+</html>
+      
+<!--
+
+
+
+-->
