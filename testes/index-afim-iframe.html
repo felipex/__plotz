@@ -11,20 +11,12 @@
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 
- <script src='js/plotz.js'></script>
- <!--
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.5.1/math.min.js"></script>   	
-<script type="text/x-mathjax-config"> 
-  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-</script>
-<script type="text/javascript"
-  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
--->
+ <script src='/js/plotz.js'></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css" integrity="sha384-wE+lCONuEo/QSfLb4AfrSk7HjWJtc4Xc1OiB2/aDBzHzjnlBP4SX7vjErTcwlA8C" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.js" integrity="sha384-tdtuPw3yx/rnUGmnLNWXtfjb9fpmwexsd+lr6HUYnUY4B7JhB5Ty7a1mYd+kto/s" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="style/style.css" />
+<link rel="stylesheet" href="/style/style.css" />
     
 <title>:: PlotZ ::</title>
 
@@ -46,10 +38,6 @@ Médio"</p>
 <header><hgroup> <h3>Tarefa 1</h3></hgroup></header>
 <p> Visualize o gráfico das seguintes funções e responda a cada pergunta sobre o
 mesmo:</p>  
-<p><span id="mykatex1">...</span></p>
-<script>
-katex.render("f(a,b,c) = (a^2+b^2+c^2)^3", mykatex1);
-</script> 
 <ol>
 <li><span id="m1" class="math">f(x)=2x+6</span>
 <ul>
@@ -59,26 +47,26 @@ katex.render("f(a,b,c) = (a^2+b^2+c^2)^3", mykatex1);
 <iframe src="/iframe/plotz-iframe.html?2x+6" height="450" width="1000" frameborder="0"></iframe>
 </li>
 
-<li>$f(x) = -5x$ 
+<li><span class="math"> f(x) = -5x</span> 
 <ul>
-  <li>O gráfico toca o eixo $x$? Em que valor de $x$?</li>
-  <li>O gráfico toca o eixo $y$? Em que valor de $y$?</li>
+  <li>O gráfico toca o eixo <span class="math">x</span>? Em que valor de <span class="math">x</span>?</li>
+  <li>O gráfico toca o eixo <span class="math">y</span>? Em que valor de <span class="math">y</span>?</li>
 </ul>
 <iframe src="/iframe/plotz-iframe.html?-5x" height="450" width="1000" frameborder="0"></iframe>
 </li>
 
-<li>$f(x) = \frac{1}{4}x -\frac{2}{5}$ 
+<li><span class="math">f(x) = \frac{1}{4}x -\frac{2}{5}</span> 
 <ul>
-  <li>O gráfico toca o eixo $x$? Em que valor de $x$?</li>
-  <li>O gráfico toca o eixo $y$? Em que valor de $y$?</li>
+  <li>O gráfico toca o eixo <span class="math">x</span>? Em que valor de <span class="math">x</span>?</li>
+  <li>O gráfico toca o eixo <span class="math">y</span>? Em que valor de <span class="math">y</span>?</li>
 </ul>
 <iframe src="/iframe/plotz-iframe.html?(1/4)x-(2/5)" height="450" width="1000" frameborder="0"></iframe>
 </li>
 
-<li>$f(x) = 0.4x+2$ 
+<li><span class="math">f(x) = 0.4x+2</span>
 <ul>
-  <li>O gráfico toca o eixo $x$? Em que valor de $x$?</li>
-  <li>O gráfico toca o eixo $y$? Em que valor de $y$?</li>
+  <li>O gráfico toca o eixo <span class="math">x</span>? Em que valor de <span class="math">x</span>?</li>
+  <li>O gráfico toca o eixo <span class="math">y</span>? Em que valor de <span class="math">y</span>?</li>
 </ul>
 <iframe src="/iframe/plotz-iframe.html?0.4x+2" height="450" width="1000" frameborder="0"></iframe>
 </li>
@@ -86,7 +74,7 @@ katex.render("f(a,b,c) = (a^2+b^2+c^2)^3", mykatex1);
 <section>
 <header><hgroup> <h3>Tarefa 2</h3></hgroup></header>
 <p>
-Obtenha o gráfico das funções $f(x)=3x+6$ e $f(x)=-0.5x-5$. Responda:
+Obtenha o gráfico das funções <span class="math">f(x)=3x+6</span> e <span class="math">f(x)=-0.5x-5</span>. Responda:
 </p>
 <ol>
   <li>Os gráficos têm ponto em comum?</li>
@@ -106,8 +94,8 @@ Obtenha o gráfico das funções $f(x)=3x+6$ e $f(x)=-0.5x-5$. Responda:
 <iframe src="/iframe/plotz-iframe.html?x&x+1&x-1&x+3" height="450" width="1000" frameborder="0">
 </iframe>
 
-<p>$y = x^2 \hbox{ when $x > 2$}$.</p>
-<span>$y = x^2 \hbox{ when $x > 2$}$.</span>
+<p><span class="math">y = x^2 \hbox{ when $x > 2$}</span>.</p>
+<span class="math">$y = x^2 \hbox{ when $x > 2$}$.</span>
 
 <p>Escrevendo mais texto</p>
 <iframe src="/iframe/plotz-iframe.html?0&1&-1" height="450" width="1000" frameborder="0"></iframe>
@@ -125,18 +113,9 @@ Obtenha o gráfico das funções $f(x)=3x+6$ e $f(x)=-0.5x-5$. Responda:
     <script type="text/javascript" >
     function processamaths() {
       var maths = Array(document.getElementsByClassName("math"));
-      var arr = [];
-      for(var i = 0; i < maths.length; i++) arr.push(maths[i]);
 
-      var mostramath = function(element) {
-          //katex.render("f(x) = 2x +6", );        
-          alert(element);
-      }
-      alert(maths[0].length);
-      //arr.map(mostramath);
       for(var i =0; i < maths[0].length; i++) {
-        //alert(maths[0][i].textContent + " - " + maths[0][i].getAttribute("id"));
-        katex.render(maths[0][i].textContent, maths[0][i].getAttribute("id"));
+        katex.render(maths[0][i].textContent, maths[0][i]);
       }
     }
     </script>
