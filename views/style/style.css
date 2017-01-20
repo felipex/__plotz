@@ -1,23 +1,6 @@
 body {
 }
       
-.tudo {
-  margin: 0 auto;
-  width: 930px;
-  background-color: #F7F7ED /*Beige*/;
-  padding-left: 1%;
-/*  border: 1px solid blue;
-  background-color: cyan;
-  height: 600px;
-*/
-}
-
-#content {
-  width: 62em;
-  height: 26em;
-  /*background-color: green;*/
-  
-}
 #lousa {
   width: 713px; 
   height: 415px; 
@@ -37,37 +20,6 @@ body {
 
 #canvas {
   position: absolute;
-}
-/*
-#menu ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333;
-}
-
-#menu li {
-    float: left;
-    background-color: blue;
-}
-
-nav {
-  display: block;
-  margin-bottom: 10px;
-}
-
-#menu ul li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;        
-}
-*/
-/* Change the link color to #111 (black) on hover */
-#menu ul li a:hover {
-/*    background-color: #111;*/
 }
 
 #panel{

@@ -1,16 +1,46 @@
 @import url('https://fonts.googleapis.com/css?family=Arima+Madurai|Monoton|Poppins&subset=latin-ext');
 
 body {
-  background-color: #75b5a4;/* #f3ceab;*/
+  /* background-color: #75b5a4;*//* #f3ceab;*/
+  background-color: #F7F7ED;
 }
 p {
   font-family: 'Arima Madurai', cursive;
   color: #595757;
 }
 .tudo {
-  padding-left: 1%;
-  padding-right: 1%;
+  /*padding-left: 1%;
+  padding-right: 1%;*/
 }
+
+header, #content, nav, footer {
+  margin: 0 auto;
+/*  width: 930px;*/
+  width: 62em;
+  /*border: 1px solid blue;*/
+}
+.tudo {
+/*  margin: 0 auto;
+  width: 930px;*/
+  background-color: #F7F7ED /*Beige*/;
+  padding-left: 1%;
+/*  border: 1px solid blue;
+  background-color: cyan;
+  height: 600px;
+*/
+}
+
+#content {
+  width: 62em;
+  height: 26em;
+  /*background-color: green;*/
+  
+}
+
+.menu-container {
+    background-color: #595757;
+}
+
 #menu ul {
     list-style-type: none;
     margin: 0;
@@ -58,4 +88,8 @@ h1 {
 .subtitulo {
   margin-top: 0;
   margin-bottom: 10px;
+}
+
+a {
+  color: #595757;
 }

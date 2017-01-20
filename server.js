@@ -8,6 +8,7 @@ var app = express();
 app.use("/style", express.static(__dirname + '/views/style'));
 app.use("/js", express.static(__dirname + '/views/js'));
 app.use("/iframe", express.static(__dirname + '/views/'));
+app.use("/exs", express.static(__dirname + '/exemplos/'));
 app.use("/testes", express.static(__dirname + '/testes/'));
 
 var rotas = function(_app, _endereco, _arquivo) {
@@ -23,6 +24,7 @@ rotas(app, '/', '/index.html');
 rotas(app, '/documentacao', '/documentacao.html');
 rotas(app, '/comentarios', '/comentarios.html');
 rotas(app, '/sobre', '/sobre.html');
+rotas(app, '/exemplos', '/exemplos.html');
 
 app.get('/plotz-iframe', function(req, res) {
    res.sendFile(__dirname + '/views/plotz-iframe.html');

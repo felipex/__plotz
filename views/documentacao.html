@@ -1,9 +1,35 @@
+<script>
+function mostra(id) {
+    let q = document.getElementById(id).visibility;
+    (q == 'hidden') ? q = 'visible' : q = 'hidden';
+}
+</script>
 <ul>
-    <li><a href="#">O que é o PlotZ?</a></li>
+    <li><a href="#">O que é o InaPlotZ?</a></li>
+    <p>
+        É um program desenvolvido para auxiliar o(a) professor(a) na ensino de funções...
+        <br>
+        O Software é livre e a plataforma é gratuita.
+    </p>
+    <li><a href="javascript:mostra('Q3')">Vantagens?</a></li>
+    <p id="Q3">
+        <ul>
+            <li>Simples de usar</li>
+            <li>Funções matemáticas traduzidas</li>
+            <li>Não precisa instalar</li>
+            <li>Funciona em dispositivos móveis</li>
+            <li>Pode ser incorporad ao roteiro/sequência escrito em HTML</li>
+            <li>Tela sem poluição visual</li>
+            
+        </ul>
+    </p>
     <li><a href="#">Como posso utilizar o PlotZ?</a></li>
-    <li><a href="#">Como posso utilizar o PlotZ?</a></li>
+    <ul>
+        <li>Como se usa hoje outros bons programas como Winplot e Geogebra ou</li>
+        <li>Integrado na sua sequência didática escrita em HTML. Veja os exemplos.</li>
+    </ul>
 </ul>
 
 <ul>
-    <li><a href="#">Exemplos</a></li>
+    <li><a href="/exemplos">Exemplos</a></li>
 </ul>
