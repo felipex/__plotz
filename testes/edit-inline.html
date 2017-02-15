@@ -20,6 +20,12 @@
   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 
+<style type="text/css">
+polyline:hover{
+  opacity: 0.5;
+  cursor: pointer;
+}  
+</style>
 
 <title>:: PlotZ ::</title>
 <script>
@@ -64,9 +70,164 @@ function editar(a){
 </head>
 <body>
   
-  <p id="p01-id" name="p01" class="editavel" ondblclick="editar(this)" >Este é o primeiro parágrafo</p>
+  <p id="p01-id" name="p01" class="editavel" ondblclick="editar(this)" >Este éoo o primeiro parágrafo</p>
   <p id="p02-id" name="p02" class="editavel" ondblclick="editar(this)" >Este é o segundo parágrafo com $TeX$ $f(x)=y$</p>
 
+
+
+<textarea id="svgcomandos" rows="5" cols="200" >
+[{"tipo": "circunferencia", "centro": {"x": 100, "y":100}, "raio": 30, "cor": "blue", "espessura": 2, "preenchimento": "none"},
+{"tipo": "circunferencia",  "centro": {"x": 160, "y":100}, "raio": 30, "cor": "blue", "espessura": 2, "preenchimento": "blue"},
+{"tipo": "circunferencia",  "centro": {"x": 130, "y":152}, "raio": 30, "cor": "blue", "espessura": 2, "preenchimento": "none"}]</textarea>
+<br/>
+<button onclick="CreateFormas()">CreateFormas</button>
+<button onclick="InterpretaFormas()">InterpretaFormas</button>
+<button onclick="plota()">Plota</button>
+
+
+<div id="svgContainer" style="border: 1px solid grey"></div>
+
+<script>
+
+function CreateFormas () {
+  var xmlns = "http://www.w3.org/2000/svg";
+  var boxWidth = 300;
+  var boxHeight = 300;
+
+  var svgElem = document.createElementNS (xmlns, "svg");
+  svgElem.setAttributeNS (null, "viewBox", "0 0 " + boxWidth + " " + boxHeight);
+  svgElem.setAttributeNS (null, "width", boxWidth);
+  svgElem.setAttributeNS (null, "height", boxHeight);
+  svgElem.style.display = "block";
+  
+  var gElement = document.createElementNS (xmlns, "circle");
+  svgElem.appendChild(gElement);
+  gElement.setAttribute(null, 'transform', 'scale(3)')
+
+  var c1 = document.createElementNS (xmlns, "circle");
+  svgElem.appendChild (c1);
+  c1.setAttributeNS (null, 'cx', '100');
+  c1.setAttributeNS (null, 'cy', '100');
+  c1.setAttributeNS (null, 'r', '50');
+  c1.setAttributeNS (null, 'stroke', '#ff0000');
+  c1.setAttributeNS (null, 'stroke-width', '3');
+  //c1.setAttributeNS (null, 'stroke-dasharray', '3 6');
+  c1.setAttributeNS (null, 'fill', '#ffffff');
+
+  var r1 = document.createElementNS (xmlns, "rect");
+  svgElem.appendChild (r1);
+  r1.setAttributeNS (null, 'x', '100');
+  r1.setAttributeNS (null, 'y', '100');
+  r1.setAttributeNS (null, 'height', '50');
+  r1.setAttributeNS (null, 'width', 2*50);
+  r1.setAttributeNS (null, 'stroke', 'blue');
+  r1.setAttributeNS (null, 'stroke-width', '3');
+  //r1.setAttributeNS (null, 'stroke-dasharray', '3 6');
+  r1.setAttributeNS (null, 'fill', 'none');
+  r1.setAttributeNS(null, 'transform', 'rotate(15, 100, 100)');
+
+  var svgContainer = document.getElementById ("svgContainer");
+      
+  svgContainer.appendChild (svgElem);         
+}
+
+function InterpretaFormas () {
+  var xmlns = "http://www.w3.org/2000/svg";
+  var boxWidth = 300;
+  var boxHeight = 300;
+
+  var svgElem = document.createElementNS (xmlns, "svg");
+  svgElem.setAttributeNS (null, "viewBox", "0 0 " + boxWidth + " " + boxHeight);
+  svgElem.setAttributeNS (null, "width", boxWidth);
+  svgElem.setAttributeNS (null, "height", boxHeight);
+  svgElem.style.display = "block";
+
+  var svgcomandos = document.getElementById("svgcomandos");
+  
+  var objs = JSON.parse(svgcomandos.value);
+  var i;
+  for (i in objs) {
+    var obj = objs[i];
+  if (obj.tipo == "circunferencia") {
+    var c = document.createElementNS(xmlns, "circle");
+    svgElem.appendChild (c);
+    /*
+    c.cx.baseVal.value = obj.x;
+    c.cy.baseVal.value = obj.y;
+    c.r.baseVal.value = obj.raio;
+    */
+    c.setAttributeNS (null, 'cx', obj.centro.x);
+    c.setAttributeNS (null, 'cy', obj.centro.y);
+    c.setAttributeNS (null, 'r', obj.raio);
+    c.setAttributeNS (null, 'stroke', obj.cor);
+    c.setAttributeNS (null, 'stroke-width', obj.espessura);
+    //c1.setAttributeNS (null, 'stroke-dasharray', '3 6');
+    c.setAttributeNS (null, 'fill', obj.preenchimento);
+  }
+  }
+  
+  var svgContainer = document.getElementById ("svgContainer");
+      
+  svgContainer.appendChild (svgElem);         
+}
+
+function fn1() {
+  var s = '';
+  var x;
+  for (x = 0; x < 700; x++) {
+    s += (x).toString() + ',' + (50*Math.sin(x/100) + 100).toString() + " ";
+  }
+  return s;
+}
+
+function fn2() {
+  var s = '';
+  var x;
+  for (x = 0; x < 700; x++) {
+    s += (x).toString() + ',' + (50*Math.cos(x/100) + 100).toString() + " ";
+  }
+  return s;
+}
+function clica() {
+  alert('Clicou');
+}
+
+function mostra() {
+  console.log('Mostrou');
+}
+
+
+function plota () {
+  var xmlns = "http://www.w3.org/2000/svg";
+  var boxWidth = 800;
+  var boxHeight = 300;
+
+  var svgElem = document.createElementNS (xmlns, "svg");
+  svgElem.setAttributeNS (null, "viewBox", "0 0 " + boxWidth + " " + boxHeight);
+  svgElem.setAttributeNS (null, "width", boxWidth);
+  svgElem.setAttributeNS (null, "height", boxHeight);
+  svgElem.style.display = "block";
+
+  var poly = document.createElementNS(xmlns, "polyline");
+  svgElem.appendChild (poly);
+  poly.setAttributeNS (null, 'points', fn1());
+  poly.setAttributeNS (null, 'style', "fill:none;stroke:black;stroke-width:3");
+  poly.setAttributeNS(null, 'onclick', 'clica()');
+  poly.setAttributeNS(null, 'onmouseover', 'mostra()');
+  
+  poly = document.createElementNS(xmlns, "polyline");
+  svgElem.appendChild (poly);
+  poly.setAttributeNS (null, 'points', fn2());
+  poly.setAttributeNS (null, 'style', "fill:none;stroke:green;stroke-width:3; stroke-dasharray: 5 5;");
+  poly.setAttributeNS(null, 'onclick', 'clica()');
+  poly.setAttributeNS(null, 'onmouseover', 'mostra()');
+
+  var svgContainer = document.getElementById ("svgContainer");
+      
+  svgContainer.appendChild (svgElem);         
+}
+
+</script>
 
 </body>
 </html>

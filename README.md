@@ -30,4 +30,8 @@ O que comprar?
 * Funções traduzidas (sen, raiz)
 * Pré carregamento de função
 * Preço/Licença
-*
+
+
+Publicações
+--------------------------
+http://www.seer.ufrgs.br/

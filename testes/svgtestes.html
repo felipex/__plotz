@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<meta http-equiv='cache-control' content='no-cache'>
+<meta http-equiv='expires' content='0'>
+<meta http-equiv='pragma' content='no-cache'>
+    
+<style type="text/css">
+polyline:hover{
+}  
+</style>
+
+<title>:: SVG Testes ::</title>
+<script>
+function oninput(event) {
+  //alert(target.target.name);
+  var namestr = event.target.attributes["name"].value;
+  var destinostr = namestr.substr(0, namestr.indexOf("-edit"));
+  var destino = document.getElementsByName(destinostr)[0];
+  destino.innerHTML = event.target.value;
+  /* global MathJax */
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+}
+
+function editar(a){
+  var formEditor = document.createElement("form");
+  formEditor.style = "border: 1px dashed gray";
+  document.body.insertBefore(formEditor, a);
+  
+  var editor = document.createElement("textarea");
+  editor.rows = 2;
+  editor.cols = 100;
+  editor.value = a.innerHTML;
+  editor.oninput = oninput;
+  editor.name = a.attributes["name"].value + "-edit";
+  formEditor.appendChild(editor);
+
+  formEditor.appendChild(document.createElement("br"));
+
+  var botaoSalvar = document.createElement("button");
+  botaoSalvar.textContent = "Salvar";
+  formEditor.appendChild(botaoSalvar);
+} 
+  
+
+</script>
+<style>
+.editavel:hover {
+  border: 1px dashed gray;
+  background-color: #EEE;
+}  
+</style>
+</head>
+<body>
+  
+  <p id="p01-id" name="p01" class="editavel" ondblclick="editar(this)" >Este éoo o primeiro parágrafo</p>
+  <p id="p02-id" name="p02" class="editavel" ondblclick="editar(this)" >Este é o segundo parágrafo com $TeX$ $f(x)=y$</p>
+
+
+
+<textarea id="svgcomandos" rows="5" cols="200" >
+[{"tipo": "circunferencia", "centro": {"x": 100, "y":100}, "raio": 30, "cor": "blue", "espessura": 2, "preenchimento": "none"},
+{"tipo": "circunferencia",  "centro": {"x": 160, "y":100}, "raio": 30, "cor": "blue", "espessura": 2, "preenchimento": "blue"},
+{"tipo": "circunferencia",  "centro": {"x": 130, "y":152}, "raio": 30, "cor": "blue", "espessura": 2, "preenchimento": "none"},
+{"tipo": "seg-reta",  "inicio": {"x": 130, "y":152}, "fim": {"x": 160, "y":100}, "cor": "green", "espessura": 2},
+{"tipo": "seg-reta",  "inicio": {"x": 100, "y":100}, "fim": {"x": 160, "y":100}, "cor": "green", "espessura": 2},
+{"tipo": "seg-reta",  "inicio": {"x": 130, "y":152}, "fim": {"x": 100, "y":100}, "cor": "green", "espessura": 2},
+{"tipo": "ponto",  "x": 100, "y":152, "cor": "red", "raio": 5},
+{"tipo": "triangulo", "vertices": "10,10 10,100 200,100", "cor": "grey", "espessura": 2, "preenchimento": "none"}
+
+]</textarea>
+<br/>
+<button onclick="CreateFormas()">CreateFormas</button>
+<button onclick="InterpretaFormas()">InterpretaFormas</button>
+<button onclick="plota()">Plota</button>
+
+
+<div id="svgContainer" style="border: 1px solid grey"></div>
+
+<script>
+
+function CreateFormas () {
+  var xmlns = "http://www.w3.org/2000/svg";
+  var boxWidth = 300;
+  var boxHeight = 300;
+
+  var svgElem = document.createElementNS (xmlns, "svg");
+  svgElem.setAttributeNS (null, "viewBox", "0 0 " + boxWidth + " " + boxHeight);
+  svgElem.setAttributeNS (null, "width", boxWidth);
+  svgElem.setAttributeNS (null, "height", boxHeight);
+  svgElem.style.display = "block";
+  
+  var gElement = document.createElementNS (xmlns, "circle");
+  svgElem.appendChild(gElement);
+  gElement.setAttribute(null, 'transform', 'scale(3)')
+
+  var c1 = document.createElementNS (xmlns, "circle");
+  svgElem.appendChild (c1);
+  c1.setAttributeNS (null, 'cx', '100');
+  c1.setAttributeNS (null, 'cy', '100');
+  c1.setAttributeNS (null, 'r', '50');
+  c1.setAttributeNS (null, 'stroke', '#ff0000');
+  c1.setAttributeNS (null, 'stroke-width', '3');
+  //c1.setAttributeNS (null, 'stroke-dasharray', '3 6');
+  c1.setAttributeNS (null, 'fill', '#ffffff');
+
+  var r1 = document.createElementNS (xmlns, "rect");
+  svgElem.appendChild (r1);
+  r1.setAttributeNS (null, 'x', '100');
+  r1.setAttributeNS (null, 'y', '100');
+  r1.setAttributeNS (null, 'height', '50');
+  r1.setAttributeNS (null, 'width', 2*50);
+  r1.setAttributeNS (null, 'stroke', 'blue');
+  r1.setAttributeNS (null, 'stroke-width', '3');
+  //r1.setAttributeNS (null, 'stroke-dasharray', '3 6');
+  r1.setAttributeNS (null, 'fill', 'none');
+  r1.setAttributeNS(null, 'transform', 'rotate(15, 100, 100)');
+
+  var svgContainer = document.getElementById ("svgContainer");
+      
+  svgContainer.appendChild (svgElem);         
+}
+
+function InterpretaFormas () {
+  var xmlns = "http://www.w3.org/2000/svg";
+  var boxWidth = 300;
+  var boxHeight = 300;
+
+  var svgElem = document.createElementNS (xmlns, "svg");
+  svgElem.setAttributeNS (null, "viewBox", "0 0 " + boxWidth + " " + boxHeight);
+  svgElem.setAttributeNS (null, "width", boxWidth);
+  svgElem.setAttributeNS (null, "height", boxHeight);
+  svgElem.style.display = "block";
+
+  var svgcomandos = document.getElementById("svgcomandos");
+  
+  var objs = JSON.parse(svgcomandos.value);
+  var i;
+  for (i in objs) {
+    var obj = objs[i];
+    if (obj.tipo == "circunferencia") {
+      var c = document.createElementNS(xmlns, "circle");
+      svgElem.appendChild (c);
+      /*
+      c.cx.baseVal.value = obj.x;
+      c.cy.baseVal.value = obj.y;
+      c.r.baseVal.value = obj.raio;
+      */
+      c.setAttributeNS (null, 'cx', obj.centro.x);
+      c.setAttributeNS (null, 'cy', obj.centro.y);
+      c.setAttributeNS (null, 'r', obj.raio);
+      c.setAttributeNS (null, 'stroke', obj.cor);
+      c.setAttributeNS (null, 'stroke-width', obj.espessura);
+      //c1.setAttributeNS (null, 'stroke-dasharray', '3 6');
+      c.setAttributeNS (null, 'fill', obj.preenchimento);
+      
+    }else if (obj.tipo == "seg-reta") {
+      var c = document.createElementNS(xmlns, "line");
+      svgElem.appendChild (c);
+      /*
+      c.cx.baseVal.value = obj.x;
+      c.cy.baseVal.value = obj.y;
+      c.r.baseVal.value = obj.raio;
+      */
+      c.setAttributeNS (null, 'x1', obj.inicio.x);
+      c.setAttributeNS (null, 'y1', obj.inicio.y);
+      c.setAttributeNS (null, 'x2', obj.fim.x);
+      c.setAttributeNS (null, 'y2', obj.fim.y);
+
+      c.setAttributeNS (null, 'stroke', obj.cor);
+      c.setAttributeNS (null, 'stroke-width', obj.espessura);
+      //c1.setAttributeNS (null, 'stroke-dasharray', '3 6');
+
+    }else if (obj.tipo == "ponto") {
+      var c = document.createElementNS(xmlns, "circle");
+      svgElem.appendChild (c);
+      c.setAttributeNS (null, 'cx', obj.x);
+      c.setAttributeNS (null, 'cy', obj.y);
+      c.setAttributeNS (null, 'r', obj.raio);
+      c.setAttributeNS (null, 'stroke', obj.cor);
+      c.setAttributeNS (null, 'stroke-width', 1);
+      c.setAttributeNS (null, 'fill', obj.cor);
+
+    }else if (obj.tipo == "triangulo") {
+      var c = document.createElementNS(xmlns, "polygon");
+      svgElem.appendChild (c);
+      c.setAttributeNS (null, 'points', obj.vertices);
+      c.setAttributeNS (null, 'stroke', obj.cor);
+      c.setAttributeNS (null, 'stroke-width', obj.espessura);
+      c.setAttributeNS (null, 'fill', obj.preenchimento);
+
+    }
+  }
+  
+  var svgContainer = document.getElementById ("svgContainer");
+      
+  svgContainer.appendChild (svgElem);         
+}
+
+function fn1() {
+  var s = '';
+  var x;
+  for (x = 0; x < 700; x++) {
+    s += (x).toString() + ',' + (50*Math.sin(x/100) + 100).toString() + " ";
+  }
+  return s;
+}
+
+function fn2() {
+  var s = '';
+  var x;
+  for (x = 0; x < 700; x++) {
+    s += (x).toString() + ',' + (50*Math.cos(x/100) + 100).toString() + " ";
+  }
+  return s;
+}
+function clica() {
+  alert('Clicou');
+}
+
+function mostra() {
+  console.log('Mostrou');
+}
+
+
+function plota () {
+  var xmlns = "http://www.w3.org/2000/svg";
+  var boxWidth = 800;
+  var boxHeight = 300;
+
+  var svgElem = document.createElementNS (xmlns, "svg");
+  svgElem.setAttributeNS (null, "viewBox", "0 0 " + boxWidth + " " + boxHeight);
+  svgElem.setAttributeNS (null, "width", boxWidth);
+  svgElem.setAttributeNS (null, "height", boxHeight);
+  svgElem.style.display = "block";
+
+  var poly = document.createElementNS(xmlns, "polyline");
+  svgElem.appendChild (poly);
+  poly.setAttributeNS (null, 'points', fn1());
+  poly.setAttributeNS (null, 'style', "fill:none;stroke:black;stroke-width:3");
+  poly.setAttributeNS(null, 'onclick', 'clica()');
+  poly.setAttributeNS(null, 'onmouseover', 'mostra()');
+  
+  poly = document.createElementNS(xmlns, "polyline");
+  svgElem.appendChild (poly);
+  poly.setAttributeNS (null, 'points', fn2());
+  poly.setAttributeNS (null, 'style', "fill:none;stroke:green;stroke-width:3; stroke-dasharray: 5 5;");
+  poly.setAttributeNS(null, 'onclick', 'clica()');
+  poly.setAttributeNS(null, 'onmouseover', 'mostra()');
+
+  var svgContainer = document.getElementById ("svgContainer");
+      
+  svgContainer.appendChild (svgElem);         
+}
+
+</script>
+
+
+<svg xmlns="http://www.w3.org/2000/svg" id="svgid" width="800" height="600" style="border: solid #CCCCCC 2px"
+ viewBox="-100 -100 800 600"  >
+<!--
+viewBox="-100 100 800 600" transform=" ">
+matrix(-1 0 0 1 0 1) transform="translate(0 -10) "
+-->  
+   <circle cx=0 cy=0 r=3 fill="red" />
+
+  <circle cx=-10 cy=0 r=3 fill="#cccccc" />
+  <circle cx=-20 cy=0 r=3 fill="#cccccc" />
+  <circle cx=-30 cy=0 r=3 fill="#cccccc" />
+  <circle cx=-40 cy=0 r=3 fill="#cccccc" />
+  <circle cx=-50 cy=0 r=3 fill="#cccccc" />
+  <circle cx=-60 cy=0 r=3 fill="#cccccc" />
+  <circle cx=-70 cy=0 r=3 fill="#cccccc" />
+  <circle cx=-80 cy=0 r=3 fill="#cccccc" />
+  <circle cx=-90 cy=0 r=3 fill="#cccccc" />
+  <circle cx=-100 cy=0 r=3 fill="orange" />
+  
+  <circle cx=10 cy=0 r=3 fill="#cccccc" />
+  <circle cx=20 cy=0 r=3 fill="#cccccc" />
+  <circle cx=30 cy=0 r=3 fill="#cccccc" />
+  <circle cx=40 cy=0 r=3 fill="#cccccc" />
+  <circle cx=50 cy=0 r=3 fill="#cccccc" />
+  <circle cx=60 cy=0 r=3 fill="#cccccc" />
+  <circle cx=70 cy=0 r=3 fill="#cccccc" />
+  <circle cx=80 cy=0 r=3 fill="#cccccc" />
+  <circle cx=90 cy=0 r=3 fill="#cccccc" />
+  <circle cx=100 cy=0 r=3 fill="#555555" />
+
+  <circle cx=110 cy=0 r=3 fill="#cccccc" />
+  <circle cx=120 cy=0 r=3 fill="#cccccc" />
+  <circle cx=130 cy=0 r=3 fill="#cccccc" />
+  <circle cx=140 cy=0 r=3 fill="#cccccc" />
+  <circle cx=150 cy=0 r=3 fill="#cccccc" />
+  <circle cx=160 cy=0 r=3 fill="#cccccc" />
+  <circle cx=170 cy=0 r=3 fill="#cccccc" />
+  <circle cx=180 cy=0 r=3 fill="#cccccc" />
+  <circle cx=190 cy=0 r=3 fill="#cccccc" />
+  <circle cx=200 cy=0 r=3 fill="#555555" />
+
+    
+  <circle cx=210 cy=0 r=3 fill="#cccccc" />
+  <circle cx=220 cy=0 r=3 fill="#cccccc" />
+  <circle cx=230 cy=0 r=3 fill="#cccccc" />
+  <circle cx=240 cy=0 r=3 fill="#cccccc" />
+  <circle cx=250 cy=0 r=3 fill="#cccccc" />
+  <circle cx=260 cy=0 r=3 fill="#cccccc" />
+  <circle cx=270 cy=0 r=3 fill="#cccccc" />
+  <circle cx=280 cy=0 r=3 fill="#cccccc" />
+  <circle cx=290 cy=0 r=3 fill="#cccccc" />
+  <circle cx=300 cy=0 r=3 fill="#555555" />
+
+  <circle cx=310 cy=0 r=3 fill="#cccccc" />
+  <circle cx=320 cy=0 r=3 fill="#cccccc" />
+  <circle cx=330 cy=0 r=3 fill="#cccccc" />
+  <circle cx=340 cy=0 r=3 fill="#cccccc" />
+  <circle cx=350 cy=0 r=3 fill="#cccccc" />
+  <circle cx=360 cy=0 r=3 fill="#cccccc" />
+  <circle cx=370 cy=0 r=3 fill="#cccccc" />
+  <circle cx=380 cy=0 r=3 fill="#cccccc" />
+  <circle cx=390 cy=0 r=3 fill="#cccccc" />
+  <circle cx=400 cy=0 r=3 fill="#555555" />
+
+  
+  <circle cx=410 cy=0 r=3 fill="#cccccc" />
+  <circle cx=420 cy=0 r=3 fill="#cccccc" />
+  <circle cx=430 cy=0 r=3 fill="#cccccc" />
+  <circle cx=440 cy=0 r=3 fill="#cccccc" />
+  <circle cx=450 cy=0 r=3 fill="#cccccc" />
+  <circle cx=460 cy=0 r=3 fill="#cccccc" />
+  <circle cx=470 cy=0 r=3 fill="#cccccc" />
+  <circle cx=480 cy=0 r=3 fill="#cccccc" />
+  <circle cx=490 cy=0 r=3 fill="#cccccc" />
+  <circle cx=500 cy=0 r=3 fill="#555555" />
+  
+  <circle cx=510 cy=0 r=3 fill="#cccccc" />
+  <circle cx=520 cy=0 r=3 fill="#cccccc" />
+  <circle cx=530 cy=0 r=3 fill="#cccccc" />
+  <circle cx=540 cy=0 r=3 fill="#cccccc" />
+  <circle cx=550 cy=0 r=3 fill="#cccccc" />
+  <circle cx=560 cy=0 r=3 fill="#cccccc" />
+  <circle cx=570 cy=0 r=3 fill="#cccccc" />
+  <circle cx=580 cy=0 r=3 fill="#cccccc" />
+  <circle cx=590 cy=0 r=3 fill="#cccccc" />
+  <circle cx=600 cy=0 r=3 fill="#555555" />    
+
+  <circle cx=00 cy=10 r=3 fill="#cccccc" />
+  <circle cx=00 cy=20 r=3 fill="#cccccc" />
+  <circle cx=00 cy=30 r=3 fill="#cccccc" />
+  <circle cx=00 cy=40 r=3 fill="#cccccc" />
+  <circle cx=00 cy=50 r=3 fill="#cccccc" />
+  <circle cx=00 cy=60 r=3 fill="#cccccc" />
+  <circle cx=00 cy=70 r=3 fill="#cccccc" />
+  <circle cx=00 cy=80 r=3 fill="#cccccc" />
+  <circle cx=00 cy=90 r=3 fill="#cccccc" />
+  <circle cx=00 cy=100 r=3 fill="#555555" />    
+
+  
+  <circle cx=00 cy=-10 r=3 fill="#cccccc" />
+  <circle cx=00 cy=-20 r=3 fill="#cccccc" />
+  <circle cx=00 cy=-30 r=3 fill="#cccccc" />
+  <circle cx=00 cy=-40 r=3 fill="#cccccc" />
+  <circle cx=00 cy=-50 r=3 fill="#cccccc" />
+  <circle cx=00 cy=-60 r=3 fill="#cccccc" />
+  <circle cx=00 cy=-70 r=3 fill="#cccccc" />
+  <circle cx=00 cy=-80 r=3 fill="#cccccc" />
+  <circle cx=00 cy=-90 r=3 fill="orange" />    
+ <!-------------
+Marcação de pontos
+-->
+  <circle cx=20 cy=20 r=3 fill="blue" />
+  <circle cx=20 cy=-20 r=3 fill="green" />
+  <circle cx=-20 cy=20 r=3 fill="yellow" />
+  <circle cx=-20 cy=-20 r=3 fill="cyan" />
+    
+</svg>
+
+ 
+</body>
+</html>
+      
+<!--
+
+
+
+-->
